@@ -26,4 +26,23 @@ module "create_ec2" {
   # }
   
 
+module "file_provisioner" {
+    source = "./modules/file_provisioner"
+    ec2_public_ip = module.create_ec2.ec2_public_ip_address
+    ec2_user = var.root_ec2_user
+    private_key = var.root_private_key
+    source_path = var.root_source_path
+    destination_path = var.root_destination_path
+}
 
+module "remote_provisioner" {
+    source = "./modules/remote_provisioner"
+    ec2_public_ip = module.create_ec2.ec2_public_ip_address
+    ec2_user = var.root_ec2_user
+    private_key = var.root_private_key
+}
+
+module "local_provisioner" {
+    source = "./modules/local_provisioner"
+    ec2_public_ip = module.create_ec2.ec2_public_ip_address 
+}
