@@ -9,9 +9,8 @@ resource "null_resource" remote_prov {
 
   provisioner "remote-exec" {
     inline = [
-        "sudo yum update -y",
-        "sudo yum install jq git -y",
-        "echo 'This is remote-exec example' > remote-exec.txt"
+         "chmod +x /home/ec2-user/jenkins.sh",
+         "bash /home/ec2-user/jenkins.sh"  
     ]    
   }
 }
